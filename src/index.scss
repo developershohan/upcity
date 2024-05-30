@@ -1,0 +1,101 @@
+/* Font Family*/
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Vidaloka&display=swap");
+
+:root {
+  --bg: white;
+  --textColor: black;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+  /* Font Family Variable Start */
+  --heading-font: "Vidaloka", serif;
+  --body-font: "Jost", sans-serif;
+  --poppins-font: "Poppins", sans-serif;
+    /* Font Size Variable Start */
+    --heading-one: clamp(2rem, -0.0733rem + 6.3692vw, 4.25rem);
+    --heading-two: clamp(1.75rem, 0.7133rem + 2.8846vw, 2.875rem);
+    --heading-three: clamp(1.5rem, 0.3353rem + 2.1661vw, 2.5rem);
+    --heading-four: clamp(1.25rem, 0.5569rem + 1.444vw, 2rem);
+    --heading-five: clamp(1.125rem, 1.2rem + 0.722vw, 1.75rem);
+    --heading-six: clamp(1rem, 0.769rem + 0.6813vw, 1.25rem);
+  /* Font Size End */
+  /* Color Variables Start */
+    --main-gradient: linear-gradient(90deg, #F69220 0.04%, #F68E20 28.67%, #F48421 54.05%, #F37221 78.11%, #F05A22 100.04%);
+    --main-gradient-rev: linear-gradient(270deg, #F69220 0.04%, #F68E20 28.67%, #F48421 54.05%, #F37221 78.11%, #F05A22 100.04%);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dark{
+  --bg: #0f172a;
+  --textColor: #ddd;
+  --softBg: #1f273a;
+  --softTextColor: #a6a6a6
+}
+
+.container {
+
+  background: var(--bg);
+  color: var(--textColor);
+}
+
+.wrapper {
+  max-width: 1540px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 80px;
+  padding-right: 80px;
+
+}
+
+/* responsive breakpoints*/
+/* @media screen and (max-width: 1540px) {
+}
+@media screen and (max-width: 1280px) {
+}
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 640px) {
+} */
+@media screen and (max-width: 1540px) {
+  .wrapper {
+    max-width: 1366px;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .wrapper {
+    max-width: 1024px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    max-width: 768px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    max-width: 640px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .wrapper {
+    max-width: 475px;
+  }
+}
