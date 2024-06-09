@@ -1,4 +1,4 @@
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+
 import Cart from "./Cart";
 
 export default function Example() {
