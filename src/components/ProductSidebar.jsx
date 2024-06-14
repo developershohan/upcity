@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -10,6 +10,8 @@ import {
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
+import { useDispatch } from "react-redux";
+import { getProductByFilter } from "../features/product/ProductApiSlice";
 
 const filters = [
   {
@@ -28,11 +30,10 @@ const filters = [
     id: "category",
     name: "Category",
     options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
+      { value: "beauty", label: "beauty", checked: false },
+      { value: "fragrances", label: "fragrances", checked: false },
+      { value: "furniture", label: "furniture", checked: false },
+      { value: "groceries", label: "groceries", checked: false },
     ],
   },
   {
@@ -50,7 +51,15 @@ const filters = [
 ];
 
 export default function ProductSidebar() {
+  const dispatch = useDispatch();
+
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [filter, setFilter] = useState({});
+  const handleFilter = (section, option) => {
+    const newFilter = { ...filter, [section.id]: option.value };
+    setFilter(newFilter);
+    dispatch(getProductByFilter(newFilter));
+  };
 
   return (
     <div className="bg-white">
@@ -203,6 +212,9 @@ export default function ProductSidebar() {
                                   defaultValue={option.value}
                                   type="checkbox"
                                   defaultChecked={option.checked}
+                                  onChange={(e) =>
+                                    handleFilter(e, section, option)
+                                  }
                                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
                                 <label

@@ -11,3 +11,24 @@ export const getProduct = createAsyncThunk("products/getproduct", async () => {
     throw new Error(error.response.data.message);
   }
 });
+export const getProductByFilter = createAsyncThunk(
+  "products/getProductByFilter",
+  async (filter, pagination) => {
+    let queryString = "";
+    for (const key in filter) {
+      queryString += `${key}=${filter[key]}&`;
+    }
+    for (const key in pagination) {
+      queryString += `${key}=${pagination[key]}&`;
+    }
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/products?${queryString}`,
+      );
+
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);

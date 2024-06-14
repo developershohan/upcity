@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProduct } from "./ProductApiSlice";
+import { getProduct, getProductByFilter } from "./ProductApiSlice";
 
 const productSlice = createSlice({
   name: "product",
@@ -16,13 +16,23 @@ const productSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getProduct.pending,(state)=>{
-      state.loader = true;
-    }).addCase(getProduct.fulfilled,(state,action)=>{
-      state.loader = false;
-      state.message = action.message
-      state.products = action.payload
-    })
+    builder
+      .addCase(getProduct.pending, (state) => {
+        state.loader = true;
+      })
+      .addCase(getProduct.fulfilled, (state, action) => {
+        state.loader = false;
+        state.message = action.message;
+        state.products = action.payload;
+      })
+      .addCase(getProductByFilter.pending, (state) => {
+        state.loader = true;
+      })
+      .addCase(getProductByFilter.fulfilled, (state, action) => {
+        state.loader = false;
+        state.message = action.message;
+        state.products = action.payload;
+      });
   },
 });
 
