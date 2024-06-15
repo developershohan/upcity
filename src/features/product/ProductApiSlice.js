@@ -13,17 +13,17 @@ export const getProduct = createAsyncThunk("products/getproduct", async () => {
 });
 export const getProductByFilter = createAsyncThunk(
   "products/getProductByFilter",
-  async (filter, pagination) => {
+  async (filter) => {
     let queryString = "";
-    for (const key in filter) {
+    for (let key in filter) {
       queryString += `${key}=${filter[key]}&`;
     }
-    for (const key in pagination) {
-      queryString += `${key}=${pagination[key]}&`;
-    }
+    // for (let key in pagination) {
+    //   queryString += `${key}=${pagination[key]}&`;
+    // }
     try {
       const response = await axios.get(
-        `http://localhost:8080/products?${queryString}`,
+        `http://localhost:8080/products?${queryString}`
       );
 
       return response.data;

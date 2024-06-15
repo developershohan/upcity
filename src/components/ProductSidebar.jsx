@@ -55,8 +55,9 @@ export default function ProductSidebar() {
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filter, setFilter] = useState({});
-  const handleFilter = (section, option) => {
+  const handleFilter = (e,section, option) => {
     const newFilter = { ...filter, [section.id]: option.value };
+    console.log(newFilter);
     setFilter(newFilter);
     dispatch(getProductByFilter(newFilter));
   };
