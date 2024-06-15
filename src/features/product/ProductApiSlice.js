@@ -11,6 +11,19 @@ export const getProduct = createAsyncThunk("products/getproduct", async () => {
     throw new Error(error.response.data.message);
   }
 });
+
+export const getProductById = createAsyncThunk(
+  "products/getProductById",
+  async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/products/${id}`);
+
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
 export const getProductByFilter = createAsyncThunk(
   "products/getProductByFilter",
   async (filter) => {
