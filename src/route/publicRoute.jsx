@@ -1,4 +1,6 @@
 import Layout from "../components/layout/Layout";
+import Login from "../page/auth/Login";
+import SignUp from "../page/auth/SignUp";
 import Cart from "../page/Cart";
 import Checkout from "../page/Checkout";
 import Home from "../page/home/Home";
@@ -29,6 +31,14 @@ export const publicRoute = [
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
       },
     ],
   },
