@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { authSelector } from "../../features/auth/authSlice";
+import { createUser } from "../../features/auth/authApiSlice";
 
 export default function SignUp() {
   const {
@@ -9,9 +12,12 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
+  const dispatch = useDispatch();
+  const { loggedInUser } = useSelector(authSelector);
+
   return (
     <>
+      {loggedInUser?.email}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Link to="/">
@@ -30,7 +36,11 @@ export default function SignUp() {
           <form
             noValidate
             className="space-y-6"
-            onSubmit={handleSubmit((data) => console.log(data))}>
+            onSubmit={handleSubmit((data) => {
+              dispatch(
+                createUser({ email: data.email, password: data.password })
+              );
+            })}>
             <div>
               <label
                 htmlFor="email"
@@ -75,7 +85,7 @@ export default function SignUp() {
                 <input
                   id="confirm_password"
                   {...register("confirm_password", { required: true })}
-                  type="confirm_password"
+                  type="password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
