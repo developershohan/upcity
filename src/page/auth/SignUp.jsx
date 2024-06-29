@@ -8,7 +8,7 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
-    watch,
+    
     formState: { errors },
   } = useForm();
 

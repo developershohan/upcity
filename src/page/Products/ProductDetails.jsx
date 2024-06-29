@@ -5,6 +5,8 @@ import { productByIdSelector } from "../../features/product/ProductSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductById } from "../../features/product/ProductApiSlice";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../../features/cart/cartApiSlice";
+import { authSelector } from "../../features/auth/authSlice";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -29,20 +31,27 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+
 export default function ProductDetails() {
   const product = useSelector(productByIdSelector);
-  const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const {loggedInUser} = useSelector(authSelector)
+  const [selectedColor, setSelectedColor] = useState(colors[0])
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const dispatch = useDispatch();
-
   const params = useParams();
+  console.log(loggedInUser);
 
   useEffect(() => {
     dispatch(getProductById(params.id));
   }, [dispatch, params.id]);
 
+  const handleCart = (e)=>{
+    e.preventDefault()
+dispatch(addToCart({...product,quantity:1, user:loggedInUser.id}))
+  }
   return (
     <div className="bg-white">
+    {loggedInUser?.email}
       {product && (
         <div className="pt-6">
           <nav aria-label="Breadcrumb">
@@ -272,6 +281,7 @@ export default function ProductDetails() {
                 </div>
 
                 <button
+                onClick={handleCart}
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                   Add to bag
